@@ -121,13 +121,13 @@ fn try_building(
 
     output.complete_step(version, status.success());
 
-    if !status.success() {
-        Ok(CheckStatus::Failure {
+    if status.success() {
+        Ok(CheckStatus::Success {
             toolchain: toolchain_specifier.to_string(),
             version: version.clone(),
         })
     } else {
-        Ok(CheckStatus::Success {
+        Ok(CheckStatus::Failure {
             toolchain: toolchain_specifier.to_string(),
             version: version.clone(),
         })

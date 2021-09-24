@@ -14,7 +14,7 @@ pub enum OutputFormat {
     None,
 }
 
-/// Gets a [`Config`] from the given matches, but sets output_format to None
+/// Gets a [`Config`] from the given matches, but sets `output_format` to None
 ///
 /// This is meant to be used for testing
 pub fn test_config_from_matches<'a>(matches: &'a ArgMatches<'a>) -> TResult<Config<'a>> {
@@ -228,11 +228,11 @@ impl<'config> TryFrom<&'config ArgMatches<'config>> for Config<'config> {
         }
 
         if let Some(min) = arg_matches.value_of(id::ARG_MIN) {
-            builder = builder.minimum_version(Some(rust_releases::semver::Version::parse(min)?))
+            builder = builder.minimum_version(Some(rust_releases::semver::Version::parse(min)?));
         }
 
         if let Some(max) = arg_matches.value_of(id::ARG_MAX) {
-            builder = builder.maximum_version(Some(rust_releases::semver::Version::parse(max)?))
+            builder = builder.maximum_version(Some(rust_releases::semver::Version::parse(max)?));
         }
 
         builder = builder.bisect(arg_matches.is_present(id::ARG_BISECT));

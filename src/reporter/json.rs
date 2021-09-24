@@ -41,7 +41,7 @@ impl crate::Output for JsonPrinter<'_> {
                 toolchain: self.toolchain,
                 check_cmd: self.cmd
             }
-        )
+        );
     }
 
     fn set_steps(&self, steps: u64) {
@@ -95,7 +95,7 @@ impl crate::Output for JsonPrinter<'_> {
                 toolchain: self.toolchain,
                 check_cmd: self.cmd,
             }
-        )
+        );
     }
 
     fn finish_failure(&self, mode: ModeIntent, _: &str) {

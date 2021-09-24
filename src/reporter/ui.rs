@@ -64,7 +64,7 @@ impl<'config> HumanPrinter<'config> {
     }
 
     fn set_progress_bar_length(&self, len: u64) {
-        self.progress.set_length(len)
+        self.progress.set_length(len);
     }
 
     fn complete_step(&self, message: impl Into<Cow<'static, str>>) {
@@ -79,7 +79,7 @@ impl<'config> HumanPrinter<'config> {
             style("Finished").green().bold(),
             message,
             style(version).cyan()
-        ))
+        ));
     }
 
     fn finish_with_err(&self, cmd: &str) {
@@ -138,6 +138,6 @@ impl<'config> crate::Output for HumanPrinter<'config> {
     }
 
     fn finish_failure(&self, _mode: ModeIntent, cmd: &str) {
-        self.finish_with_err(cmd)
+        self.finish_with_err(cmd);
     }
 }

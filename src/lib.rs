@@ -1,5 +1,4 @@
 #![deny(clippy::all)]
-#![allow(clippy::upper_case_acronyms, clippy::unnecessary_wraps)]
 
 use crate::check::{as_toolchain_specifier, check_toolchain, CheckStatus};
 use crate::config::{Config, ModeIntent};
@@ -93,7 +92,7 @@ fn run_verify_msrv_action(config: &Config, _release_index: &ReleaseIndex) -> TRe
 fn report_verify_completion(output: &impl Output, status: CheckStatus, cmd: &str) {
     match status {
         CheckStatus::Success { version, .. } => {
-            output.finish_success(ModeIntent::VerifyMSRV, &version)
+            output.finish_success(ModeIntent::VerifyMSRV, &version);
         }
         CheckStatus::Failure { .. } => output.finish_failure(ModeIntent::VerifyMSRV, cmd),
     }
@@ -211,7 +210,7 @@ fn determine_msrv_impl(
             output.finish_success(ModeIntent::DetermineMSRV, version);
         }
         MinimalCompatibility::NoCompatibleToolchains => {
-            output.finish_failure(ModeIntent::DetermineMSRV, cmd)
+            output.finish_failure(ModeIntent::DetermineMSRV, cmd);
         }
     }
 
@@ -266,16 +265,14 @@ fn test_against_releases_bisect(
     });
 
     // update compatibility
-    *compatibility = outcome?
-        .map(|i| {
-            let version = releases[i].version();
+    *compatibility = outcome?.map_or(MinimalCompatibility::NoCompatibleToolchains, |i| {
+        let version = releases[i].version();
 
-            MinimalCompatibility::CapableToolchain {
-                toolchain: as_toolchain_specifier(version, config.target()),
-                version: version.clone(),
-            }
-        })
-        .unwrap_or(MinimalCompatibility::NoCompatibleToolchains);
+        MinimalCompatibility::CapableToolchain {
+            toolchain: as_toolchain_specifier(version, config.target()),
+            version: version.clone(),
+        }
+    });
 
     Ok(())
 }
