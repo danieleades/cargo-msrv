@@ -62,7 +62,7 @@ jobs:
     steps:
       # checkout
       - name: checkout_repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2.3.5
         with:
           fetch-depth: 1
 
@@ -84,7 +84,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: checkout_repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2.3.5
         with:
           fetch-depth: 1
       - name: install_rust
@@ -103,7 +103,7 @@ jobs:
     continue-on-error: true
     steps:
       - name: checkout_repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.3.5
       - name: install_rust
         uses: actions-rs/toolchain@v1
         with:
@@ -128,7 +128,7 @@ jobs:
 
     continue-on-error: ${{ matrix.checks == 'advisories' }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.5
       - uses: EmbarkStudios/cargo-deny-action@v1
 
   msrv:
@@ -137,7 +137,7 @@ jobs:
     continue-on-error: true
     steps:
       - name: checkout_repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.3.5
       - name: install_rust
         uses: actions-rs/toolchain@v1
         with:
